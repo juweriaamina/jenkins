@@ -1,2 +1,1 @@
-jenkins pipeline github
-restart
+jenkins pipeline github 3
