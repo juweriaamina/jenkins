@@ -12,24 +12,24 @@ pipeline {
             }
             post {
                 success {
-                    script {
+                    
                         emailext (
                             to: "juweria.amina@gmail.com",
                             subject: "SUCCESS: Unit and Integration Tests",
                             body: "The Unit and Integration Tests stage completed successfully. Please check the attached logs for details.",
                             attachLog: true
                         )
-                    }
+                    
                 }
                 failure {
-                    script {
+                    
                         emailext (
                             to: "juweria.amina@gmail.com",
                             subject: "FAILURE: Unit and Integration Tests",
                             body: "The Unit and Integration Tests stage failed. Please check the Jenkins dashboard and attached logs for details.",
                             attachLog: true
                         )
-                    }
+                    
                 }
             }
         }
@@ -44,17 +44,17 @@ pipeline {
             }
             post {
                 success {
-                    script {
+                    
                         emailext (
                             to: "juweria.amina@gmail.com",
                             subject: "SUCCESS: Security Scan",
                             body: "The Security Scan stage completed successfully. Please check the attached logs for details.",
                             attachLog: true
                         )
-                    }
+                    
                 }
                 failure {
-                    script {
+                
                         emailext (
                             to: "juweria.amina@gmail.com",
                             subject: "FAILURE: Security Scan",
@@ -62,7 +62,7 @@ pipeline {
                             attachLog: true
                         )
                     }
-                }
+                
             }
         }
         stage('Deploy to Staging') {
