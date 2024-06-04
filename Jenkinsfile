@@ -83,10 +83,7 @@ pipeline {
             steps {
                 echo "Deploying application to AWS EC2 production instance. The production deployment uses AWS EC2, ensuring the application is available for end users."
             }
-             stage('complete') {
-            steps {
-                echo "Deploying application to AWS EC2 production instance. The production deployment uses AWS EC2, ensuring the application is available for end users."
-            }
+            
         }
     }
 }
