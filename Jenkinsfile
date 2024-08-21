@@ -6,37 +6,38 @@ pipeline {
             steps {
                 script {
                     // Example: Check Python version
-                    sh 'python3 --version'
+                    bat 'python --version'
                     
                     // Run the Python script
-                    sh '''
-                    python3 <<EOF
+                    bat '''
+                    @echo off
+                    python -c "
 import requests
 import pandas as pd
 
 # Define API details
 channels = {
-    "Channel1": {
-        "url": "https://api.thingspeak.com/channels/2561136/feeds.json?api_key=0LDH7ODWRLXSWTUQ",
-        "fields": ["created_at", "entry_id", "field2", "field3", "field4", "field5", "field6", "field7", "field8"],
-        "rename": {
-            "created_at": "timestamp",
-            "field2": "Body_temp",
-            "field3": "flamevalue",
-            "field4": "light sensitivity",
-            "field5": "pressure",
-            "field6": "Gas_resistance",
-            "field7": "temperature",
-            "field8": "humidity"
+    'Channel1': {
+        'url': 'https://api.thingspeak.com/channels/2561136/feeds.json?api_key=0LDH7ODWRLXSWTUQ',
+        'fields': ['created_at', 'entry_id', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7', 'field8'],
+        'rename': {
+            'created_at': 'timestamp',
+            'field2': 'Body_temp',
+            'field3': 'flamevalue',
+            'field4': 'light sensitivity',
+            'field5': 'pressure',
+            'field6': 'Gas_resistance',
+            'field7': 'temperature',
+            'field8': 'humidity'
         }
     },
-    "Channel2": {
-        "url": "https://api.thingspeak.com/channels/2561145/feeds.json?api_key=NL5IN3EHKM65CY8M",
-        "fields": ["created_at", "entry_id", "field2", "field3"],
-        "rename": {
-            "created_at": "timestamp",
-            "field2": "heartRate",
-            "field3": "SP02"
+    'Channel2': {
+        'url': 'https://api.thingspeak.com/channels/2561145/feeds.json?api_key=NL5IN3EHKM65CY8M',
+        'fields': ['created_at', 'entry_id', 'field2', 'field3'],
+        'rename': {
+            'created_at': 'timestamp',
+            'field2': 'heartRate',
+            'field3': 'SP02'
         }
     }
 }
@@ -82,18 +83,18 @@ def fetch_and_transform_data(channel_url, fields, rename_columns):
 
 # Fetch and transform data from Channel 1
 fetch_and_transform_data(
-    channels["Channel1"]["url"], 
-    channels["Channel1"]["fields"],
-    channels["Channel1"]["rename"]
+    channels['Channel1']['url'], 
+    channels['Channel1']['fields'],
+    channels['Channel1']['rename']
 )
 
 # Fetch and transform data from Channel 2
 fetch_and_transform_data(
-    channels["Channel2"]["url"], 
-    channels["Channel2"]["fields"],
-    channels["Channel2"]["rename"]
+    channels['Channel2']['url'], 
+    channels['Channel2']['fields'],
+    channels['Channel2']['rename']
 )
-EOF
+                    "
                     '''
                 }
             }
